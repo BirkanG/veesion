@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # Define the workspace directory
-WORKSPACE_DIR="/home/username/veesion"
+WORKSPACE_DIR="/home/veesion"
 
 # Check if the workspace directory exists
 if [ ! -d "$WORKSPACE_DIR" ]; then
     echo "Workspace directory not found: $WORKSPACE_DIR"
-    echo "Please ensure the repository is cloned to /home/username"
     exit 1
 fi
 
@@ -18,10 +17,15 @@ cd "$WORKSPACE_DIR"
 echo "Cleaning up old build files (build/, install/, and log/)..."
 rm -rf build install log
 
-# Clone OpenVINS project 
+# Clone and build OpenVINS project 
+echo "Building OpenVINS project using colcon..."
 mkdir src
+cd src
 git clone https://github.com/rpng/open_vins/
 cd ..
+export MAKEFLAGS="-j 1"
+colcon build --executor sequential
+colcon build --event-handlers console_cohesion+ --packages-select ov_core ov_init ov_msckf ov_eval
 
 # Clone imu_tools
 cd src
@@ -31,7 +35,6 @@ cd ..
 # Build the workspace
 echo "Building the workspace using colcon..."
 colcon build --symlink-install
-colcon build --event-handlers console_cohesion+ --packages-select ov_core ov_init ov_msckf ov_eval
 
 # Source the workspace
 echo "Sourcing the workspace install/setup.bash..."

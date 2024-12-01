@@ -31,6 +31,8 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /etc/bash.bashrc
 
 
 ENV SHELL /bin/bash
+ENV USERNAME $USERNAME
+
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
