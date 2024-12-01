@@ -12,6 +12,10 @@ fi
 # Navigate to the workspace directory
 echo "Changing to workspace directory: $WORKSPACE_DIR"
 cd "$WORKSPACE_DIR"
+mkdir src
+sudo rosdep update
+sudo rosdep install --from-paths src --ignore-src -y
+sudo chown -R $(whoami) /home/veesion/
 
 # Clean up old build files if exists
 echo "Cleaning up old build files (build/, install/, and log/)..."
@@ -19,7 +23,6 @@ rm -rf build install log
 
 # Clone and build OpenVINS project 
 echo "Building OpenVINS project using colcon..."
-mkdir src
 cd src
 git clone https://github.com/rpng/open_vins/
 cd ..
