@@ -26,10 +26,10 @@ echo "Building OpenVINS project using colcon..."
 cd src
 git clone https://github.com/rpng/open_vins/
 cd ..
-export MAKEFLAGS="-j 1"
-colcon build --executor sequential
+export MAKEFLAGS="-j 1"             #<- These 2 lines are not necessary, but if your screen freezes during colcon build you can use these lines. Otherwise, comment out.
+colcon build --executor sequential  #Use "colcon build" instead, if the screen does not freeze.
 colcon build --event-handlers console_cohesion+ --packages-select ov_core ov_init ov_msckf ov_eval
-unset MAKEFLAGS
+unset MAKEFLAGS                     #<- 
 
 # Clone imu_tools
 cd src
