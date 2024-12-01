@@ -29,6 +29,7 @@ cd ..
 export MAKEFLAGS="-j 1"
 colcon build --executor sequential
 colcon build --event-handlers console_cohesion+ --packages-select ov_core ov_init ov_msckf ov_eval
+unset MAKEFLAGS
 
 # Clone imu_tools
 cd src
