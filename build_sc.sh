@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the workspace directory
-WORKSPACE_DIR="/home/veesion"
+WORKSPACE_DIR="/home/veesion/veesion_ws"
 
 # Check if the workspace directory exists
 if [ ! -d "$WORKSPACE_DIR" ]; then
